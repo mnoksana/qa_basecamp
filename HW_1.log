@@ -1,0 +1,66 @@
+---Step 1
+oksana@buster:~/qa_basecamp$ git log
+commit 7112c8e7dad77a905a075dee57f770d2191d54ac (HEAD -> task1, origin/task1)
+Author: Oksana Mnushka <mnushka.ov@gmail.com>
+Date:   Thu Oct 22 18:47:35 2020 +0300
+
+    First commit
+oksana@buster:~/qa_basecamp$ touch us233.txt
+oksana@buster:~/qa_basecamp$ git st
+On branch task1
+Your branch is up to date with 'origin/task1'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	us233.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+oksana@buster:~/qa_basecamp$ git add us233.txt 
+oksana@buster:~/qa_basecamp$ git commit -m "Add us233.txt"
+[task1 54f1e6e] Add us233.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 us233.txt
+oksana@buster:~/qa_basecamp$ git log
+commit 54f1e6e0a66a7d255e9d991c6fdc06ba528fb663 (HEAD -> task1)
+Author: Oksana Mnushka <mnushka.ov@gmail.com>
+Date:   Fri Nov 6 20:30:24 2020 +0200
+
+    Add us233.txt
+
+commit 7112c8e7dad77a905a075dee57f770d2191d54ac (origin/task1)
+Author: Oksana Mnushka <mnushka.ov@gmail.com>
+Date:   Thu Oct 22 18:47:35 2020 +0300
+
+    First commit
+oksana@buster:~/qa_basecamp$ git reset HEAD~1
+oksana@buster:~/qa_basecamp$ git st
+On branch task1
+Your branch is up to date with 'origin/task1'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	us233.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+---Step 2
+git co -b us234
+
+---Step 3
+touch us234.txt 
+git add us234.txt
+git rm  --cached us234.txt
+rm 'us234.txt'
+oksana@buster:~/qa_basecamp$ git st
+On branch us234
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   us233.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	us234.txt

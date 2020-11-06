@@ -1,0 +1,82 @@
+
+---Step1
+
+oksana@buster:~$ mkdir -p ~/f1/f2/f3/f4/f5/f6
+oksana@buster:~$ echo data > ~/f1/data.log
+oksana@buster:~$ cat ./f1/data.log 
+data
+oksana@buster:~$ cp ./f1/data.log ./f1/f2/f3/f4/f5/f6/
+oksana@buster:~$ find . -name "data*" -not -path "./.config/*"
+./f1/data.log
+./f1/f2/f3/f4/f5/f6/data.log
+oksana@buster:~$ find . -name "data*" -not -path "./.config/*" | grep f6 | xargs rm -f
+oksana@buster:~$ find . -name "data*" -not -path "./.config/*"
+./f1/data.log
+
+---Step2
+
+oksana@buster:~$ find /proc/ -name "*.log" 2> find_error.txt
+oksana@buster:~$ cat find_error.txt 
+find: ‘/proc/tty/driver’: Permission denied
+find: ‘/proc/1/task/1/fd’: Permission denied
+...
+
+---Step3
+
+oksana@buster:~$ find / -name "*.log" > find_error.txt 2>&1
+oksana@buster:~$ cat find_error.txt | more
+/home/oksana/.config/Code/Session Storage/000003.log
+/home/oksana/.config/Code/Local Storage/leveldb/000003.log
+/home/oksana/.config/Code/logs/20201106T210949/sharedprocess.log
+/home/oksana/.config/Code/logs/20201106T210949/main.log
+/home/oksana/.config/Code/logs/20201106T210949/renderer1.log
+/home/oksana/.config/Code/logs/20201106T210949/exthost1/output_logging_20201106T210952/3-GitHub Authentication.log
+/home/oksana/.config/Code/logs/20201106T210949/exthost1/exthost.log
+/home/oksana/.config/Code/logs/20201106T210949/exthost1/output_logging_20201106T210951/2-Git.log
+/home/oksana/.config/Code/logs/20201106T210949/exthost1/output_logging_20201106T210951/1-Microsoft Authentication.log
+/home/oksana/.config/Code/logs/20201106T210949/userDataSync.log
+/home/oksana/.config/Code/logs/20201106T210949/telemetry.log
+/home/oksana/.config/Code/logs/20201106T210949/output_1_20201106T210950/extensions.log
+/home/oksana/.config/Code/logs/20201106T210949/output_1_20201106T210950/tasks.log
+/home/oksana/.config/Code/logs/20201106T202846/sharedprocess.log
+/home/oksana/.config/Code/logs/20201106T202846/main.log
+/home/oksana/.config/Code/logs/20201106T202846/renderer1.log
+/home/oksana/.config/Code/logs/20201106T202846/exthost1/output_logging_20201106T202857/2-Git.log
+/home/oksana/.config/Code/logs/20201106T202846/exthost1/output_logging_20201106T202855/1-Microsoft Authentication.log
+/home/oksana/.config/Code/logs/20201106T202846/exthost1/output_logging_20201106T202858/3-GitHub Authentication.log
+/home/oksana/.config/Code/logs/20201106T202846/exthost1/exthost.log
+/home/oksana/.config/Code/logs/20201106T202846/userDataSync.log
+/home/oksana/.config/Code/logs/20201106T202846/output_1_20201106T202850/extensions.log
+/home/oksana/.config/Code/logs/20201106T202846/output_1_20201106T202850/tasks.log
+/home/oksana/.config/Code/logs/20201106T202846/telemetry.log
+/home/oksana/f1/data.log
+find: ‘/home/vl/.config/Code’: Permission denied
+find: ‘/home/vl/.config/gtk-3.0’: Permission denied
+
+---Step4
+oksana@buster:~$ sudo chown root:root file 
+[sudo] password for oksana: 
+oksana@buster:~$ ls -al file
+-rw-r--r-- 1 root root 0 Nov  6 21:32 file
+oksana@buster:~$ sudo chmod +x file
+oksana@buster:~$ ls -al file
+-rwxr-xr-x 1 root root 0 Nov  6 21:32 file
+
+---Step5
+oksana@buster:~$ apt-got || echo "Oooh"
+bash: apt-got: command not found
+Oooh
+
+---Step6
+oksana@buster:~$ date  && echo "Oooh"
+Fri 06 Nov 2020 09:37:32 PM EET
+Oooh
+
+---Step7
+echo 'ls -al' > script.sh && chmod +x script.sh && sh -c ./script.sh  
+total 228
+drwxr-xr-x 19 oksana oksana  4096 Nov  6 21:46 .
+drwxr-xr-x  4 root   root    4096 Oct 30 17:03 ..
+-rw-r--r--  1 oksana oksana  2393 Nov  6 21:27 2
+-rw-------  1 oksana oksana   369 Nov  3 17:50 .bash_history
+....
